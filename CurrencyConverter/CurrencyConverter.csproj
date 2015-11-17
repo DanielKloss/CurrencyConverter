@@ -41,7 +41,16 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="Converter.cs" />
+    <Compile Include="DailyData.cs" />
+    <Compile Include="HistoricalData.cs" />
+    <Compile Include="HistoricalManipulation.cs" />
+    <Compile Include="HistoricalMap.cs" />
+    <Compile Include="Listings.cs" />
+    <Compile Include="Manipulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredMap.cs" />
+    <Compile Include="UpdateController.cs" />
+    <Compile Include="Writer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

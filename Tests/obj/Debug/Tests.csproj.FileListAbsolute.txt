@@ -1,0 +1,9 @@
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Tests.dll
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Tests.pdb
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\CurrencyConverter.dll
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\CurrencyConverter.pdb
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\obj\Debug\Tests.dll
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\obj\Debug\Tests.pdb
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Moq.dll
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Moq.xml

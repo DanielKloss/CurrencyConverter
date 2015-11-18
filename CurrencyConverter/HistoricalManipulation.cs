@@ -14,7 +14,7 @@ namespace CurrencyConverter
       get { return _historicalMap; }
       set { _historicalMap = value; }
     }
-    
+
     public HistoricalManipulation(HistoricalMap HistoricalMap)
     {
       historicalMap = HistoricalMap;
@@ -68,6 +68,28 @@ namespace CurrencyConverter
     {
       Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>();
       data = historicalMap.GetHistoricalData();
+    }
+
+    public List<string> GetDataCurrencyName(Dictionary<string, Dictionary<string, double>> returnedDictionary)
+    {
+      List<string> currencyName = new List<string>();
+      foreach (Dictionary<string, double> dictionary in returnedDictionary.Values)
+      {
+        foreach (string key in dictionary.Keys)
+        {
+          if (!currencyName.Contains(key))
+          {
+            currencyName.Add(key);
+          }
+        }
+      }
+      return currencyName;
+    }
+
+    public double GreatestFluctuation(double number2, double number1)
+    {
+      double difference = Math.Abs(number1 - number2);
+      return difference;
     }
   }
 }

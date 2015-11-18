@@ -9,6 +9,9 @@ namespace CurrencyConverter
 {
     class DailyData
     {
+
+      public static Dictionary<string, double> dictionaryMetaDaily;
+        
        public static Dictionary<string, double> ReadXMLFile(string URL)
         {
             String URLString = URL;
@@ -30,7 +33,12 @@ namespace CurrencyConverter
                     dailyDictionary.Add(node.Attributes[0].Value.ToString(), Convert.ToDouble(node.Attributes[1].Value));
                 }
             }
-                return dailyDictionary;
+            dictionaryMetaDaily = dailyDictionary;
+            return dictionaryMetaDaily;
         }
+       public static Dictionary<string, double> GetDictionary()
+       {
+           return dictionaryMetaDaily;
+       }
     }
 }

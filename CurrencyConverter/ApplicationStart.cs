@@ -21,10 +21,12 @@ namespace CurrencyConverter
            
             */
             string path = @"C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\eurofxref-daily.xml";
-           Dictionary<string,double> dictionary = DailyData.ReadXMLFile(path);
-           Reader.ReadFromDailyData(dictionary);
-          
-            
+            Dictionary<string, double> dictionary = DailyData.ReadXMLFile(path);
+            Reader.ReadFromDailyData(dictionary);
+
+            Converter convert_currency = new Converter(false, "Nzd", 17.00);
+            convert_currency.GetRate();
+            Console.WriteLine(convert_currency.Convert());
 
             Console.ReadLine();
         }

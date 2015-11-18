@@ -8,33 +8,32 @@ namespace CurrencyConverter
 {
     public class Converter
     {
-        bool toEuros;
-        string currency;
-        double amount;
-        double rate;
-        double convertedMoney;
+        public bool toEuros;
+        public string currency;
+        public double amount;
+        public double rate;
+        public double convertedMoney;
 
         public Converter(bool ToEuros, string Currency, double Amount)
         {
             toEuros = ToEuros;
-            currency = Currency;
+            currency = Currency.ToUpper();
             amount = Amount;
         }
-        Double GetRate()
+        public Double GetRate()
         {
-            //Here we would put DailyData.GetDictionary & then a foreach loop where it compares the
-            //currency code with the key of the Dictionary returning the value associated
-            //with that key
-            //Dictionary rates(currencyCode, rateVal) = DailyData.GetDictionary();
-            //foreach (currencyCode in rates){
-            //  if (currencyCode == currency){
-            //      return rateVal;
-            //  }
-            //rate = rateVal;
+            Dictionary<string, double> rates = DailyData.GetDictionary();
+          
+            /*Finds rate of currency supplied from dailydictionary*/
+            if (rates.ContainsKey(currency))
+            {
+                rate = rates[currency];
+            }
+            
             return rate;
         }
 
-        Double Convert()
+        public Double Convert()
         {
             if (toEuros == true)
             {

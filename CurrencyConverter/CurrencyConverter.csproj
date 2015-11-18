@@ -56,9 +56,7 @@
     <Compile Include="Manipulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
-    <Compile Include="StoredMap.cs" />
     <Compile Include="UpdateController.cs" />
-    <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

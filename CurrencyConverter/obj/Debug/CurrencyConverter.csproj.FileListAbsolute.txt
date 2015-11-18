@@ -1,9 +1,11 @@
-C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\bin\Debug\CurrencyConverter.dll
 C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\bin\Debug\CurrencyConverter.pdb
-C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.dll
 C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.pdb
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\bin\Debug\CurrencyConverter.dll
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\bin\Debug\CurrencyConverter.pdb
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.csprojResolveAssemblyReference.cache
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.dll
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.pdb
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\bin\Debug\CurrencyConverter.exe
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.csprojResolveAssemblyReference.cache
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.exe
+C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\CurrencyConverter\obj\Debug\CurrencyConverter.exe

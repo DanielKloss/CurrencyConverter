@@ -10,17 +10,19 @@ using System.Xml.Linq;
 
 namespace CurrencyConverter
 {
-  public  class HistoricalData
+    public class HistoricalData
     {
+      Dictionary<string, double> CurrencyRates = new Dictionary<string, double>();
+
        public  Dictionary<string, Dictionary<string, double>> ReadXMLFile(string URL)
         {
             String URLString = URL;
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(URLString);
+            XmlDocument doc = new XmlDocument();  // Creates an XmlDocumentd
+            doc.Load(URLString);   // Loads an XmlDocumentd
 
             Dictionary<string, Dictionary<string, double>> dictionary =
-                new Dictionary<string, Dictionary<string, double>>();
+                new Dictionary<string, Dictionary<string, double>>();  // This decalares the Date as the key e.g Dictionary<Date, Dictionary<USD,12.888>>
 
             //Console.WriteLine(doc.DocumentElement.ChildNodes[2].ChildNodes[0].InnerXml);
 
@@ -28,25 +30,30 @@ namespace CurrencyConverter
             
             for (int i = 0; i < counter; i++)
             {
+                //the xmlNode gets all <Cube> within the Cube Node 
                 XmlNode DateNodes = doc.DocumentElement.ChildNodes[2].ChildNodes[i];
-                XmlAttributeCollection attcol = DateNodes.Attributes;
-                Console.WriteLine(attcol[0].Value);
+                XmlAttributeCollection attcol = DateNodes.Attributes;  // Gets all attribute of Cube e.g <Cube time="....">
+                Console.WriteLine(attcol[0].Value); // extracts all the value of time for each cube e.g <cube time="2015-08-11"
 
-                Dictionary<string, double> CurrencyRates ;
+
+
             
+                // this foreach loop loops through each subchild within a parent node <Cube time =".....">
                 foreach (XmlNode node in DateNodes) 
                 {
 
-                   Console.WriteLine(node.Attributes[0].Value);
+                  /*This line prints the currency Abbreviation and value
+                   * Console.WriteLine(node.Attributes[0].Value);
                    Console.WriteLine(node.Attributes[1].Value);
-
-                   CurrencyRates = new Dictionary<string, double>();
-                   CurrencyRates.Add(node.Attributes[0].Value,Convert.ToDouble(node.Attributes[1].Value));
-
-                   dictionary.Add(attcol[0].Value,CurrencyRates);
-                  
+                   */
+                   
+                
+                   CurrencyRates.Add(node.Attributes[0].Value,Convert.ToDouble(node.Attributes[1].Value));                   
+                   
                 }
-                CurrencyRates = null;
+                dictionary.Add(attcol[0].Value, CurrencyRates);
+
+                CurrencyRates = new Dictionary<string, double>();
                 Console.WriteLine();
             }
 

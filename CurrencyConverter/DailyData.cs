@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace CurrencyConverter
 {
-    class DailyData:Reader
+    class DailyData
     {
 
       public static Dictionary<string, double> dictionaryMetaDaily;

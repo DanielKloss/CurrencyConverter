@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace CurrencyConverter
 {
-    public class HistoricalData : Reader
+    public class HistoricalData
     {
       Dictionary<string, double> CurrencyRates = new Dictionary<string, double>();
 

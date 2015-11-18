@@ -48,7 +48,6 @@
     <Compile Include="ApplicationStart.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="CurrencyRates.cs" />
     <Compile Include="DailyData.cs" />
     <Compile Include="HistoricalData.cs" />
     <Compile Include="HistoricalManipulation.cs" />

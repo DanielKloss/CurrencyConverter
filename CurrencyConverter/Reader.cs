@@ -10,7 +10,7 @@ namespace CurrencyConverter
     {
 
        Dictionary<string, double> ReadFromXMLFile(string URL);
-       Dictionary<string, Dictionary<string, double>> ReadFromXMLFile(string URL);
+     //  Dictionary<string, Dictionary<string, double>> ReadFromXMLFile(string URL);
 
        /*The ReadFromDailyData  method reads from the Dictionary returned from the DailyData*/
         /*public   static void ReadFromDailyData(Dictionary<string, double> dictionary)

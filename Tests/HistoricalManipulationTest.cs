@@ -99,17 +99,57 @@ namespace Tests
       Assert.AreEqual(expectedValue, actualValue);
     }
     [TestMethod]
-    public void Test_Manipulation_CallsOnGetHistoricalData_WhenCalled()
+    public void Test_GreatestFluctuation_ReturnsDifference_WhenGivenTwoDoubles()
     {
       //Arrange
-      //mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(returnedDictionary);   
-      //Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>();
-      
+      double number1 = 2.3142;
+      double number2 = 1.29485;
+      double expectedValue = 1.01935;
+
+      //Act
+      double actualValue = historicalManipulation.GreatestFluctuation(number2, number1);
+      //Assert
+      Assert.AreEqual(expectedValue, actualValue);
+    }
+    [TestMethod]
+    public void Test_GetData_CallsOnGetHistoricalData_WhenCalled()
+    {
+      //Arrange
+
       //Act
       historicalManipulation.GetData();
 
       //Assert
       mockHistoricalMap.Verify(r => r.GetHistoricalData(), Times.Once);
+    }
+    [TestMethod]
+    public void Test_GetDataCurrencyName_ReturnsListOfKey_WhenGivenDictionaryOfDictionary()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.43256},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.43256},
+        {"YEN", 1},
+        {"USD", 0.999439}
+      };
+      Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
+      List<string> expectedValue = new List<string>() { "GBP", "EUR", "KRN", "YEN", "USD" };
+
+      //Act
+      List<string> actualValue = historicalManipulation.GetDataCurrencyName(returnedDictionary);
+
+      //Assert
+      CollectionAssert.AreEqual(expectedValue, actualValue);
     }
   }
 }

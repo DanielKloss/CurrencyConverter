@@ -1,0 +1,9 @@
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\UnitTest.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\UnitTest.pdb
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\CurrencyConverter.exe
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\Moq.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\CurrencyConverter.pdb
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\bin\Debug\Moq.xml
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\obj\Debug\UnitTestReader.csprojResolveAssemblyReference.cache
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\obj\Debug\UnitTest.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\UnitTest\obj\Debug\UnitTest.pdb

@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace CurrencyConverter
 {
-    class DailyData
+    class DailyData:Reader
     {
 
       public static Dictionary<string, double> dictionaryMetaDaily;
@@ -27,9 +27,6 @@ namespace CurrencyConverter
                 XmlNode childNode = doc.DocumentElement.ChildNodes[2].ChildNodes[i];
                 foreach (XmlNode node in childNode)
                 {
-                    //Console.WriteLine(node.Attributes[0].Value);
-                    //Console.WriteLine(node.Attributes[1].Value);
-
                     dailyDictionary.Add(node.Attributes[0].Value.ToString(), Convert.ToDouble(node.Attributes[1].Value));
                 }
             }

@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CurrencyConverter
 {
-    class HistoricalMap
+    public class HistoricalMap
     {
-        Dictionary<string, double> GetHistoricalData()
+        public virtual Dictionary<string,Dictionary<string, double>> GetHistoricalData()
         {
-
-            return null;
+          return null;
         }
     }
 }

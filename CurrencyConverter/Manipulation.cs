@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CurrencyConverter
 {
-    class Manipulation : HistoricalManipulation
+    class Manipulation
     {
 
         string ExtremePerCurrency()

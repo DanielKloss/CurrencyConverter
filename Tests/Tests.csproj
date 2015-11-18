@@ -54,6 +54,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="HistoricalManipulationTest.cs" />
+    <Compile Include="ListingTest.cs" />
+    <Compile Include="ManipulationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

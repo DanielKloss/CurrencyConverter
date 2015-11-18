@@ -14,60 +14,46 @@ namespace CurrencyConverter
       get { return _historicalMap; }
       set { _historicalMap = value; }
     }
-
-    public HistoricalManipulation(HistoricalMap HistoricalMap)
+    private Listings _listings;
+    public Listings listings
+    {
+      get { return _listings; }
+      set { _listings = value; }
+    }
+    private Manipulation _manipulation;
+    public Manipulation manipulation
+    {
+      get { return _manipulation; }
+      set { _manipulation = value; }
+    }
+    public HistoricalManipulation(HistoricalMap HistoricalMap, Listings Listings, Manipulation Manipulation)
     {
       historicalMap = HistoricalMap;
+      listings = Listings;
+      manipulation = Manipulation;
     }
-    public double Averages(List<double> listOfValues)
+
+    public Dictionary<string, double> Listings(string functionToCall)
     {
-      if (listOfValues.Count == 0)
+      Dictionary<string, double> returnDictionary = new Dictionary<string,double>();
+      returnDictionary = listings.Averages(GetData());
+      if (functionToCall != "Averages")
       {
-        return 0;
+        returnDictionary = listings.SortedAverages(returnDictionary);
+        if (functionToCall=="StrongerThanEuros")
+        {
+          returnDictionary = listings.StrongerThanEuros(returnDictionary);
+        }
       }
-
-      return listOfValues.Average();
+      return returnDictionary;
     }
 
-    public Dictionary<string, double> ListAverages(Dictionary<string, double> averageDictionary)
-    {
-      Dictionary<string, double> sortedDictionary = new Dictionary<string, double>();
-      foreach (KeyValuePair<string, double> item in averageDictionary.OrderBy(i => i.Value))
-      {
-        sortedDictionary.Add(item.Key, item.Value);
-      }
-      return sortedDictionary;
-    }
-
-    public Dictionary<string, double> StrongerThanEuros(Dictionary<string, double> sortedDictionary)
-    {
-      List<string> strongerThanEurosList = sortedDictionary.Keys.ToList();
-      Dictionary<string, double> strongerThanEurosDictionary = new Dictionary<string, double>();
-
-      int euroIndex = strongerThanEurosList.IndexOf("EUR");
-      strongerThanEurosList.RemoveRange(0, euroIndex + 1);
-
-      foreach (string key in strongerThanEurosList)
-      {
-        strongerThanEurosDictionary.Add(key, sortedDictionary[key]);
-      }
-
-      return strongerThanEurosDictionary;
-    }
-
-    public Tuple<double, double> ExtremePerCurrency(List<double> listOfDoubles)
-    {
-      listOfDoubles.Sort();
-      double max = listOfDoubles[0];
-      double min = listOfDoubles[listOfDoubles.Count - 1];
-      Tuple<double, double> maxMinTuple = new Tuple<double, double>(max, min);
-      return maxMinTuple;
-    }
-
-    public void GetData()
+    public Dictionary<string, List<double>> GetData()
     {
       Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>();
       data = historicalMap.GetHistoricalData();
+      Dictionary<string, List<double>> dictionary = GetDataCurrencyDictionary(data);
+      return dictionary;
     }
 
     public List<string> GetDataCurrencyName(Dictionary<string, Dictionary<string, double>> returnedDictionary)
@@ -86,10 +72,40 @@ namespace CurrencyConverter
       return currencyName;
     }
 
-    public double GreatestFluctuation(double number2, double number1)
+    public List<double> GetDataCurrencyValue(Dictionary<string, Dictionary<string, double>> returnedDictionary, string searchKey)
     {
-      double difference = Math.Abs(number1 - number2);
-      return difference;
+      List<double> currencyValue = new List<double>();
+      foreach (Dictionary<string, double> dictionary in returnedDictionary.Values)
+      {
+        double currentValue =0;
+        try
+        {
+          currentValue = dictionary[searchKey];
+        }
+        catch (KeyNotFoundException)
+        {
+          currentValue = -1.0;
+        }
+
+        if (currentValue > 0)
+        {
+          currencyValue.Add(currentValue);
+        }
+      }
+      return currencyValue;
     }
+
+    public virtual Dictionary<string, List<double>> GetDataCurrencyDictionary(Dictionary<string, Dictionary<string, double>> data)
+    {
+      List<string> currencyName = GetDataCurrencyName(data);
+      Dictionary<string,List<double>> currencyDictionary = new Dictionary<string,List<double>>();
+      foreach (string Name in currencyName)
+      {
+        List<double> currencyValue = GetDataCurrencyValue(data, Name);
+        currencyDictionary.Add(Name, currencyValue);
+      }
+      return currencyDictionary;
+    }
+
   }
 }

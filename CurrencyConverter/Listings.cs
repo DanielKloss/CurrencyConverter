@@ -6,25 +6,53 @@ using System.Threading.Tasks;
 
 namespace CurrencyConverter
 {
-    class Listings
+  public class Listings
+  {
+    public double WorkAverages(List<double> listOfValues)
     {
-        Dictionary<string, double> GetCurrencyAverages()
-        {
-            return null;
-        }
+      if (listOfValues.Count == 0)
+      {
+        return 0;
+      }
 
-        SortedDictionary<string, double> sortCurrencies(Dictionary<string, double> dictionary)
-        {
-
-
-            return null;
-        }
-
-
-        Dictionary<string, double> StrongerThanEuro(SortedDictionary<string, double> dictionary)
-        {
-
-            return null;
-        }
+      return listOfValues.Average();
     }
+
+    public Dictionary<string, double> SortedAverages(Dictionary<string, double> averageDictionary)
+    {
+      Dictionary<string, double> sortedDictionary = new Dictionary<string, double>();
+      foreach (KeyValuePair<string, double> item in averageDictionary.OrderBy(i => i.Value))
+      {
+        sortedDictionary.Add(item.Key, item.Value);
+      }
+      return sortedDictionary;
+    }
+
+    public Dictionary<string, double> StrongerThanEuros(Dictionary<string, double> sortedDictionary)
+    {
+      List<string> strongerThanEurosList = sortedDictionary.Keys.ToList();
+      Dictionary<string, double> strongerThanEurosDictionary = new Dictionary<string, double>();
+
+      int euroIndex = strongerThanEurosList.IndexOf("EUR");
+      strongerThanEurosList.RemoveRange(0, euroIndex + 1);
+
+      foreach (string key in strongerThanEurosList)
+      {
+        strongerThanEurosDictionary.Add(key, sortedDictionary[key]);
+      }
+
+      return strongerThanEurosDictionary;
+    }
+
+    public virtual Dictionary<string, double> Averages(Dictionary<string, List<double>> dictionary)
+    {
+      Dictionary<string, double> averagesDictionary = new Dictionary<string, double>();
+      foreach (string key in dictionary.Keys)
+      {
+        double averages = WorkAverages(dictionary[key]);
+        averagesDictionary.Add(key, averages);
+      }
+      return averagesDictionary;
+    }
+  }
 }

@@ -117,13 +117,18 @@ namespace CurrencyConverter
             Console.WriteLine("C. Average rate for each currency, for the last 90 days");
             Console.WriteLine("D. Sorted Average rate for each currency, for the last 90 days");
             Console.WriteLine("E. Display the Currencies that are stronger than Euro");
+            Console.WriteLine("F. The highest and lowest exchange rate for each currency against the Euro");
+            Console.WriteLine("G. The currency with the greatest change  ");
+            Console.WriteLine("H. The 10 currencies with the smallest change");
 
-            //Instantiate the Listings class
-          
+            //Instantiate the Listings class... To acess C-E options
             HistoricalMap map = new HistoricalMap();
             Listings newList = new Listings();
-            Manipulation manipulate = new Manipulation();
+            Manipulation manipulate = new Manipulation(newList);
             HistoricalManipulation manipulateHistory = new HistoricalManipulation(map, newList,manipulate);
+
+
+            //Instantiate blah blah ... To acess F-H
 
 
             //Retrieves user Input
@@ -140,6 +145,9 @@ namespace CurrencyConverter
                 case 'C': Console.WriteLine("************"); manipulateHistory.Listings("Averages"); LeaveLoop(); break;
                 case 'D': Console.WriteLine("************"); manipulateHistory.Listings("SortedAverages"); LeaveLoop(); break;
                 case 'E': Console.WriteLine("************"); manipulateHistory.Listings("StrongerThanEuros"); LeaveLoop(); break;
+                case 'F': Console.WriteLine("************"); manipulateHistory.ExtremePerCurrency(); LeaveLoop(); break;
+                case 'G': Console.WriteLine("************"); manipulateHistory.Manipulation("GreatestFluctuationPerCurrency"); LeaveLoop(); break;
+                case 'H': Console.WriteLine("************"); manipulateHistory.Manipulation("TenMostStable"); LeaveLoop(); break;
                 default: Console.WriteLine(); Console.WriteLine("Enter appropriate Option"); goto LabelWord;
                  
             }

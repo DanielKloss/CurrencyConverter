@@ -133,7 +133,7 @@ namespace Tests
         {"P",1.97}
       };
 
-      mockListings.Setup(x => x.SortedDictionary(It.IsAny<Dictionary<string, double>>())).Returns(expectedValue);
+      mockListings.Setup(x => x.SortDictionary(It.IsAny<Dictionary<string, double>>())).Returns(expectedValue);
 
       //Act
       Dictionary<string, double> actualValue = manipulation.SortDictionary(It.IsAny<Dictionary<string, double>>());

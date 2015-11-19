@@ -217,7 +217,7 @@ namespace Tests
       };
       
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
-      mockListings.Setup(x => x.SortedAverages(It.IsAny < Dictionary<string, List<double>>>())).Returns(dictionary);
+      mockListings.Setup(x => x.SortDictionary(It.IsAny <Dictionary<string, double>>())).Returns(dictionary);
 
       //Act
       historicalManipulation.Listings("SortedAverages");

@@ -123,14 +123,24 @@ namespace CurrencyConverter
       {
         returnDictionary = manipulation.TenMostStable(returnDictionary);
       }
-
+      foreach (KeyValuePair<string, double> dict in returnDictionary)
+      {
+          Console.WriteLine("{0} : {1}", dict.Key, dict.Value);
+          Console.WriteLine();
+      }
       return returnDictionary;
     }
     public Dictionary<string, Tuple<double, double>> ExtremePerCurrency()
     {
       Dictionary<string, Tuple<double, double>> returnExtreme = new Dictionary<string, Tuple<double, double>>();
       returnExtreme = manipulation.ExtremePerCurrency(GetData());
-      return returnExtreme;
+
+      foreach (KeyValuePair<string, Tuple<double,double>> dict in returnExtreme)
+      {
+          Console.WriteLine("{0} : {1}", dict.Key, dict.Value);
+          Console.WriteLine();
+      }
+        return returnExtreme;
     }
   }
 }

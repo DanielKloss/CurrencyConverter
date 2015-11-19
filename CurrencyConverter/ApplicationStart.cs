@@ -49,7 +49,7 @@ namespace CurrencyConverter
                        {
                            convertTo = "from";
                        }
-                       Console.Write("Result of converting " + currency + " " + convertTo + " Euros is " + converter.Convert());
+                       Console.WriteLine("Result of converting " + currency + " " + convertTo + " Euros is " + Math.Round(converter.Convert(),3));
                    }
                    else
                    {
@@ -64,7 +64,7 @@ namespace CurrencyConverter
 
         static void LeaveLoop()
             {
-               Console.WriteLine("Would you like to exit? Y/N");
+               Console.WriteLine("Would you like to exit the Application? Y/N");
                char reply = Convert.ToChar(Console.ReadLine());
                if (reply == 'Y' || reply == 'y')
                {

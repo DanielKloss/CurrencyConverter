@@ -7,3 +7,12 @@ C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\obj\Debug\Te
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Moq.dll
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\Moq.xml
 C:\Users\gael.bouyer\Documents\C# Workspace\CurrencyConverter\Tests\bin\Debug\CurrencyConverter.exe
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\Tests.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\Tests.pdb
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\CurrencyConverter.exe
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\Moq.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\CurrencyConverter.pdb
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\bin\Debug\Moq.xml
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\obj\Debug\Tests.csprojResolveAssemblyReference.cache
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\obj\Debug\Tests.dll
+C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\Tests\obj\Debug\Tests.pdb

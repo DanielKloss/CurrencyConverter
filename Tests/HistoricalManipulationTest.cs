@@ -27,23 +27,15 @@ namespace Tests
       //Arrange
       Dictionary<string, double> dictionary = new Dictionary<string, double>()
       {
-        {"GBP", 1.43256},
-        {"EUR", 1},
-        {"KRN", 0.999439}
-      };
-      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
-      {
-        {"GBP", 1.5526},
-        {"YEN", 1},
-        {"USD", 0.999439}
+        {"EUR", 1}
       };
       Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>()
       {
         {"ME", dictionary},
-        {"WE",differentDictionary}
       };
 
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(returnedDictionary);
+      
       //Act
       historicalManipulation.GetData();
 
@@ -188,23 +180,13 @@ namespace Tests
     public void Test_Listings_CallsOnAverages_WhenCalled()
     {
       //Arrange
-      //Arrange
       Dictionary<string, double> dictionary = new Dictionary<string, double>()
       {
-        {"GBP", 1.4},
-        {"EUR", 1},
-        {"KRN", 0.999439}
-      };
-      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
-      {
-        {"GBP", 1.5},
-        {"YEN", 1.23},
-        {"KRN", 0.99439}
+        {"GBP", 1.4}
       };
       Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>()
       {
-        {"ME", dictionary},
-        {"WE",differentDictionary}
+        {"ME", dictionary}
       };
 
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
@@ -214,6 +196,60 @@ namespace Tests
 
       //Assert
       mockListings.Verify(x => x.Averages(It.IsAny<Dictionary<string, List<double>>>()), Times.Once);
+    }
+    [TestMethod]
+    public void Test_Listings_CallsOnSortedAverages_WhenCalledWithSortedAverages()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.4}
+      };
+      Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+      };
+      List<double> gbp = new List<double>() { 1.4, 1.5 };
+      Dictionary<string, List<double>> dataList = new Dictionary<string, List<double>>()
+      {
+        {"GBP",gbp},
+      };
+      
+      mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
+      mockListings.Setup(x => x.Averages(It.IsAny < Dictionary<string, List<double>>>())).Returns(dictionary);
+
+      //Act
+      historicalManipulation.Listings("SortedAverages");
+
+      //Assert
+      mockListings.Verify(x => x.SortedAverages(It.IsAny < Dictionary<string, double>>()), Times.Once);
+    }
+    [TestMethod]
+    public void Test_Listings_CallsOnStrongerThanEuros_WhenCalledWithStrongerThanEuros()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.4}
+      };
+      Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+      };
+      List<double> gbp = new List<double>() { 1.4, 1.5 };
+      Dictionary<string, List<double>> dataList = new Dictionary<string, List<double>>()
+      {
+        {"GBP",gbp},
+      };
+
+      mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
+      mockListings.Setup(x => x.Averages(It.IsAny<Dictionary<string, List<double>>>())).Returns(dictionary);
+
+      //Act
+      historicalManipulation.Listings("StrongerThanEuros");
+
+      //Assert
+      mockListings.Verify(x => x.StrongerThanEuros(It.IsAny<Dictionary<string, double>>()), Times.Once);
     }
   }
 }

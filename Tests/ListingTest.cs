@@ -57,7 +57,7 @@ namespace Tests
       expectedDictionary.Add("GBP", 1.43256);
 
       //Act
-      Dictionary<string, double> sortedDictionary = listing.SortedAverages(dictionary);
+      Dictionary<string, double> sortedDictionary = listing.SortDictionary(dictionary);
 
       //Assert
       CollectionAssert.AreEqual(expectedDictionary, sortedDictionary);

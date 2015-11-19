@@ -35,12 +35,12 @@ namespace CurrencyConverter
 
     public Dictionary<string, double> Listings(string functionToCall)
     {
-      Dictionary<string, double> returnDictionary = new Dictionary<string,double>();
+      Dictionary<string, double> returnDictionary = new Dictionary<string, double>();
       returnDictionary = listings.Averages(GetData());
       if (functionToCall != "Averages")
       {
-        returnDictionary = listings.SortedAverages(returnDictionary);
-        if (functionToCall=="StrongerThanEuros")
+        returnDictionary = listings.SortDictionary(returnDictionary);
+        if (functionToCall == "StrongerThanEuros")
         {
           returnDictionary = listings.StrongerThanEuros(returnDictionary);
         }
@@ -82,7 +82,7 @@ namespace CurrencyConverter
       List<double> currencyValue = new List<double>();
       foreach (Dictionary<string, double> dictionary in returnedDictionary.Values)
       {
-        double currentValue =0;
+        double currentValue = 0;
         try
         {
           currentValue = dictionary[searchKey];
@@ -103,7 +103,7 @@ namespace CurrencyConverter
     public virtual Dictionary<string, List<double>> GetDataCurrencyDictionary(Dictionary<string, Dictionary<string, double>> data)
     {
       List<string> currencyName = GetDataCurrencyName(data);
-      Dictionary<string,List<double>> currencyDictionary = new Dictionary<string,List<double>>();
+      Dictionary<string, List<double>> currencyDictionary = new Dictionary<string, List<double>>();
       foreach (string Name in currencyName)
       {
          // Console.WriteLine(Name);
@@ -113,5 +113,24 @@ namespace CurrencyConverter
       return currencyDictionary;
     }
 
+    public Dictionary<string, double> Manipulation(string functionToCall)
+    {
+      Dictionary<string, double> returnDictionary = new Dictionary<string, double>();
+      Dictionary<string, Tuple<double, double>> returnExtreme = new Dictionary<string, Tuple<double, double>>();
+      returnExtreme = manipulation.ExtremePerCurrency(GetData());
+      returnDictionary = manipulation.GreatestFluctuationPerCurrency(returnExtreme);
+      if (functionToCall == "TenMostStable")
+      {
+        returnDictionary = manipulation.TenMostStable(returnDictionary);
+      }
+
+      return returnDictionary;
+    }
+    public Dictionary<string, Tuple<double, double>> ExtremePerCurrency()
+    {
+      Dictionary<string, Tuple<double, double>> returnExtreme = new Dictionary<string, Tuple<double, double>>();
+      returnExtreme = manipulation.ExtremePerCurrency(GetData());
+      return returnExtreme;
+    }
   }
 }

@@ -10,8 +10,11 @@ namespace CurrencyConverter
 {
     public class HistoricalData
     {
+        // CurrencyRates dictionary stores the Currency and Value before it is passed to the 
+        //outer dictionary
         Dictionary<string, double> currencyRates = new Dictionary<string, double>();
 
+       static Dictionary<string, Dictionary<string, double>> HandlerForGetDictionary = new Dictionary<string, Dictionary<string, double>>();
 
         public Dictionary<string, Dictionary<string, double>> ReadXMLFile(string URL)
         {
@@ -25,8 +28,6 @@ namespace CurrencyConverter
 
                 var dictionary = new Dictionary<string, Dictionary<string, double>>();  // This decalares the Date as the key e.g Dictionary<Date, Dictionary<USD,12.888>>
 
-                //Console.WriteLine(doc.DocumentElement.ChildNodes[2].ChildNodes[0].InnerXml);
-
                 int counter = doc.DocumentElement.ChildNodes[2].ChildNodes.Count;
 
                 for (int i = 0; i < counter; i++)
@@ -34,28 +35,17 @@ namespace CurrencyConverter
                     //the xmlNode gets all <Cube> within the Cube Node 
                     XmlNode DateNodes = doc.DocumentElement.ChildNodes[2].ChildNodes[i];
                     XmlAttributeCollection attcol = DateNodes.Attributes;  // Gets all attribute of Cube e.g <Cube time="....">
-                    Console.WriteLine(attcol[0].Value); // extracts all the value of time for each cube e.g <cube time="2015-08-11"
-
-
-
 
                     // this foreach loop loops through each subchild within a parent node <Cube time =".....">
                     foreach (XmlNode node in DateNodes)
                     {
-
-                        /*This line prints the currency Abbreviation and value
-                         * Console.WriteLine(node.Attributes[0].Value);
-                         Console.WriteLine(node.Attributes[1].Value);
-                         */
-
                         currencyRates.Add(node.Attributes[0].Value, Convert.ToDouble(node.Attributes[1].Value));
                     }
                     dictionary.Add(attcol[0].Value, currencyRates);
 
                     currencyRates = new Dictionary<string, double>();
-                    Console.WriteLine();
                 }
-
+                HandlerForGetDictionary = dictionary;
                 return dictionary;
             }
             else
@@ -73,6 +63,11 @@ namespace CurrencyConverter
                 return true;
             }
             else return false;
+        }
+
+        public static Dictionary<string, Dictionary<string, double>> getDictionary()
+        {
+            return HandlerForGetDictionary;
         }
     }
 }

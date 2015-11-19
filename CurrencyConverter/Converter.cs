@@ -37,7 +37,7 @@ namespace CurrencyConverter
         {
             if (toEuros == true)
             {
-                convertedMoney = 1.00 / (amount * rate);
+                convertedMoney = amount * (1.00 / rate);
             }
             else
             {

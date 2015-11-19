@@ -45,6 +45,11 @@ namespace CurrencyConverter
           returnDictionary = listings.StrongerThanEuros(returnDictionary);
         }
       }
+      foreach (KeyValuePair<string, double> dict in returnDictionary)
+      {
+          Console.WriteLine("{0} : {1}", dict.Key,dict.Value);
+          Console.WriteLine();
+      }
       return returnDictionary;
     }
 
@@ -69,7 +74,7 @@ namespace CurrencyConverter
           }
         }
       }
-      return currencyName;
+     return currencyName;
     }
 
     public List<double> GetDataCurrencyValue(Dictionary<string, Dictionary<string, double>> returnedDictionary, string searchKey)
@@ -101,6 +106,7 @@ namespace CurrencyConverter
       Dictionary<string,List<double>> currencyDictionary = new Dictionary<string,List<double>>();
       foreach (string Name in currencyName)
       {
+         // Console.WriteLine(Name);
         List<double> currencyValue = GetDataCurrencyValue(data, Name);
         currencyDictionary.Add(Name, currencyValue);
       }

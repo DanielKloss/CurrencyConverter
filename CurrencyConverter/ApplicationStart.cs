@@ -22,7 +22,7 @@ namespace CurrencyConverter
          
              
                 Console.WriteLine("Please choose a non-Euro currency from the list above.");
-                string currency = Console.ReadLine();
+                string currency = Console.ReadLine().ToUpper();
                 if (!DailyData.dictionaryMetaDaily.ContainsKey(currency))
                 {
                     Console.WriteLine("I'm sorry, the currency you input is not on our records.");
@@ -82,11 +82,7 @@ namespace CurrencyConverter
 
         public static void Main(string[] args)
         {
-           /* HistoricalData data1 = new HistoricalData();
-         
-            data1.ReadXMLFile(@"C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\currencyrate90days.xml");*/
-           
-            
+               
             string path = @"C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\eurofxref-daily.xml";
             Dictionary<string, double> dictionary = DailyData.ReadXMLFile(path);
 
@@ -108,37 +104,49 @@ namespace CurrencyConverter
             Console.WriteLine("\n");
 
 
-            //This line displays options for the User
+            //This line changes the background of the Username
             Console.BackgroundColor = ConsoleColor.Red;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("*******************************************************************************");
             Console.ResetColor();
             Console.WriteLine("\n");
+
+            //This section displays options to the User
          LabelWord: Console.WriteLine("A. Convert Any Currency to Euro");
             Console.WriteLine("B. Convert Euro to another  Currency");
-            Console.WriteLine("C. Display the History of the Last 90 Days");
+            Console.WriteLine("C. Average rate for each currency, for the last 90 days");
+            Console.WriteLine("D. Sorted Average rate for each currency, for the last 90 days");
+            Console.WriteLine("E. Display the Currencies that are stronger than Euro");
+
+            //Instantiate the Listings class
+          
+            HistoricalMap map = new HistoricalMap();
+            Listings newList = new Listings();
+            Manipulation manipulate = new Manipulation();
+            HistoricalManipulation manipulateHistory = new HistoricalManipulation(map, newList,manipulate);
+
 
             //Retrieves user Input
             string answerOption = Console.ReadLine();
-          //  while(answerOption.GetType() == 'c'.GetType()){
-        //        
-               //}
+
            try { 
             char answerOption2 = Convert.ToChar(answerOption);
             
-            
-            switch (answerOption2)
+            // iterates over all the user options to execute the Data
+            switch (Char.ToUpper(answerOption2))
             {
                 case 'A': getDataForConverter(true); LeaveLoop(); break;
                 case 'B': getDataForConverter(false); LeaveLoop(); break;
-                case 'C': Console.WriteLine("Sorry, we don't have this yet!"); LeaveLoop(); break;
+                case 'C': Console.WriteLine("************"); manipulateHistory.Listings("Averages"); LeaveLoop(); break;
+                case 'D': Console.WriteLine("************"); manipulateHistory.Listings("SortedAverages"); LeaveLoop(); break;
+                case 'E': Console.WriteLine("************"); manipulateHistory.Listings("StrongerThanEuros"); LeaveLoop(); break;
                 default: Console.WriteLine(); Console.WriteLine("Enter appropriate Option"); goto LabelWord;
                  
             }
             }
            catch (FormatException ex)
            {
-               Console.WriteLine("Error with Input parameter:  "+ex.Message);
+               Console.WriteLine("Error with Input parameter:  " +ex.Message);
                goto LabelWord;
            }
           

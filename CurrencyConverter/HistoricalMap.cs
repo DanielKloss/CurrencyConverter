@@ -10,7 +10,9 @@ namespace CurrencyConverter
     {
         public virtual Dictionary<string,Dictionary<string, double>> GetHistoricalData()
         {
-          return null;
+            HistoricalData data1 = new HistoricalData();
+            data1.ReadXMLFile(@"C:\Users\Tolani.Jaiye-Tikolo\Documents\C#workspace\CurrencyConverter\currencyrate90days.xml");          
+          return HistoricalData.getDictionary(); 
         }
     }
 }

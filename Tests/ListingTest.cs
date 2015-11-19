@@ -74,9 +74,8 @@ namespace Tests
       sortedDictionary.Add("YEN", 1.3);
       sortedDictionary.Add("GBP", 1.43256);
       Dictionary<string, double> expectedValue = new Dictionary<string, double>() { 
-      {"AUD",1.22234} , 
-      {"YEN",1.3},
-      {"GBP",1.43256}
+      {"USD", 0.9564} , 
+      {"KRN", 0.999439},
       };
 
       //Act

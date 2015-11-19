@@ -190,6 +190,7 @@ namespace Tests
       };
 
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
+      mockListings.Setup(x => x.Averages(It.IsAny<Dictionary<string, List<Double>>>())).Returns(dictionary);
 
       //Act
       historicalManipulation.Listings("Averages");
@@ -216,7 +217,7 @@ namespace Tests
       };
       
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
-      mockListings.Setup(x => x.Averages(It.IsAny < Dictionary<string, List<double>>>())).Returns(dictionary);
+      mockListings.Setup(x => x.SortedAverages(It.IsAny <Dictionary<string,double>>())).Returns(dictionary);
 
       //Act
       historicalManipulation.Listings("SortedAverages");
@@ -243,7 +244,7 @@ namespace Tests
       };
 
       mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
-      mockListings.Setup(x => x.Averages(It.IsAny<Dictionary<string, List<double>>>())).Returns(dictionary);
+      mockListings.Setup(x => x.StrongerThanEuros(It.IsAny<Dictionary<string, double>>())).Returns(dictionary);
 
       //Act
       historicalManipulation.Listings("StrongerThanEuros");

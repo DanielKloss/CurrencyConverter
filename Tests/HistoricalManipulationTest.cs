@@ -11,111 +11,39 @@ namespace Tests
   {
     HistoricalManipulation historicalManipulation;
     Mock<HistoricalMap> mockHistoricalMap;
+    Mock<Manipulation> mockManipulation;
+    Mock<Listings> mockListings;
     [TestInitialize]
     public void Setup()
     {
       mockHistoricalMap = new Mock<HistoricalMap>();
-      historicalManipulation = new HistoricalManipulation(mockHistoricalMap.Object);
-    }
-    [TestMethod]
-    public void Test_Averages_ReturnsAverageOfGivenListOfDoubles()
-    {
-      //Arrange
-      List<double> listOfValues = new List<double>() { 3, 5, 7, 2.3, 6.2, 6.5 };
-      double expectedValue = 5;
-
-      //Act
-      double actualValues = historicalManipulation.Averages(listOfValues);
-
-      //Assert
-      Assert.AreEqual(expectedValue, actualValues);
-    }
-    [TestMethod]
-    public void Test_Averages_Returns0WhenGivenEmptyList()
-    {
-      //Arrange
-      List<double> listOfValues = new List<double>();
-      double expectedValue = 0;
-
-      //Act
-      double actualValues = historicalManipulation.Averages(listOfValues);
-
-      //Assert
-      Assert.AreEqual(expectedValue, actualValues);
-    }
-    [TestMethod]
-    public void Test_ListAverages_ReturnsASortedDictionary_GivenADictionaryOfAverages()
-    {
-      //Arrange
-      Dictionary<string, double> dictionary = new Dictionary<string, double>();
-      dictionary.Add("GBP", 1.43256);
-      dictionary.Add("EUR", 1);
-      dictionary.Add("KRN", 0.999439);
-      Dictionary<string, double> expectedDictionary = new Dictionary<string, double>();
-      expectedDictionary.Add("KRN", 0.999439);
-      expectedDictionary.Add("EUR", 1);
-      expectedDictionary.Add("GBP", 1.43256);
-
-      //Act
-      Dictionary<string, double> sortedDictionary = historicalManipulation.ListAverages(dictionary);
-
-      //Assert
-      CollectionAssert.AreEqual(expectedDictionary, sortedDictionary);
-    }
-    [TestMethod]
-    public void Test_StrongerThanEuros_ReturnsADictionaryOfCurrencesStrongerThanEuros_GivenASortedDictionaryOfAverages()
-    {
-      //Arrange
-      Dictionary<string, double> sortedDictionary = new Dictionary<string, double>();
-      sortedDictionary.Add("USD", 0.9564);
-      sortedDictionary.Add("KRN", 0.999439);
-      sortedDictionary.Add("EUR", 1);
-      sortedDictionary.Add("AUD", 1.22234);
-      sortedDictionary.Add("YEN", 1.3);
-      sortedDictionary.Add("GBP", 1.43256);
-      Dictionary<string, double> expectedValue = new Dictionary<string, double>() { 
-      {"AUD",1.22234} , 
-      {"YEN",1.3},
-      {"GBP",1.43256}
-      };
-
-      //Act
-      Dictionary<string, double> actualValue = historicalManipulation.StrongerThanEuros(sortedDictionary);
-
-      //Assert
-      CollectionAssert.AreEqual(expectedValue, actualValue);
-    }
-    [TestMethod]
-    public void Test_ExtremePerCurrency_ReturnsMinAndMax_WhenGivenAListOfDoubles()
-    {
-      //Arrange
-      List<double> listOfDoubles = new List<double>() { 1.294, 0.999, 3.21, 1.2333, 0.1523324 };
-      Tuple<double, double> expectedValue = new Tuple<double, double>(0.1523324, 3.21);
-
-      //Act
-      Tuple<double, double> actualValue = historicalManipulation.ExtremePerCurrency(listOfDoubles);
-
-      //Assert
-      Assert.AreEqual(expectedValue, actualValue);
-    }
-    [TestMethod]
-    public void Test_GreatestFluctuation_ReturnsDifference_WhenGivenTwoDoubles()
-    {
-      //Arrange
-      double number1 = 2.3142;
-      double number2 = 1.29485;
-      double expectedValue = 1.01935;
-
-      //Act
-      double actualValue = historicalManipulation.GreatestFluctuation(number2, number1);
-      //Assert
-      Assert.AreEqual(expectedValue, actualValue);
+      mockManipulation = new Mock<Manipulation>();
+      mockListings = new Mock<Listings>();
+      historicalManipulation = new HistoricalManipulation(mockHistoricalMap.Object,mockListings.Object,mockManipulation.Object);
     }
     [TestMethod]
     public void Test_GetData_CallsOnGetHistoricalData_WhenCalled()
     {
       //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.43256},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.5526},
+        {"YEN", 1},
+        {"USD", 0.999439}
+      };
+      Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
 
+      mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(returnedDictionary);
       //Act
       historicalManipulation.GetData();
 
@@ -150,6 +78,142 @@ namespace Tests
 
       //Assert
       CollectionAssert.AreEqual(expectedValue, actualValue);
+    }
+    [TestMethod]
+    public void Test_GetDataCurrencyValue_ReturnsListOfValues_WhenGivenDictionaryOfDictionaryAndLookingValue()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.43256},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.5526},
+        {"YEN", 1},
+        {"USD", 0.999439}
+      };
+      Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
+      string searchValue = "GBP";
+      List<double> expectedValue = new List<double>() { 1.43256, 1.5526 };
+
+      //Act
+      List<double> actualValue = historicalManipulation.GetDataCurrencyValue(returnedDictionary, searchValue);
+
+      //Assert
+      CollectionAssert.AreEqual(expectedValue, actualValue);
+
+    }
+    [TestMethod]
+    public void Test_GetDataCurrencyValue_ReturnsListOfValues_WhenGivenDictionaryOfDictionaryAndLookingValueIgnoringNulls()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.43256},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.5526},
+        {"YEN", 1},
+        {"USD", 0.999439}
+      };
+      Dictionary<string, Dictionary<string, double>> returnedDictionary = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
+      string searchValue = "EUR";
+      List<double> expectedValue = new List<double>() { 1 };
+
+      //Act
+      List<double> actualValue = historicalManipulation.GetDataCurrencyValue(returnedDictionary, searchValue);
+
+      //Assert
+      CollectionAssert.AreEqual(expectedValue, actualValue);
+
+    }
+    [TestMethod]
+    public void Test_GetDataCurrencyDictionary_ReturnsDictionaryOfList_GivenDictionaryOfDictionary()
+    {
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.4},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.5},
+        {"YEN", 1.23},
+        {"KRN", 0.99439}
+      };
+      Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
+      List<double> gbp = new List<double>() { 1.4, 1.5 };
+      List<double> eur = new List<double>() { 1 };
+      List<double> krn = new List<double>() { 0.999439, 0.99439 };
+      List<double> yen = new List<double>() { 1.23 };
+
+      Dictionary<string, List<double>> expectedValue = new Dictionary<string, List<double>>()
+      {
+        {"GBP",gbp},
+        {"EUR",eur},
+        {"KRN",krn},
+        {"YEN",yen}
+      };
+      //Act
+      Dictionary<string, List<double>> actualValue = historicalManipulation.GetDataCurrencyDictionary(data);
+
+      //Assert
+      CollectionAssert.AreEqual(expectedValue["GBP"], actualValue["GBP"]);
+      CollectionAssert.AreEqual(expectedValue["EUR"], actualValue["EUR"]);
+      CollectionAssert.AreEqual(expectedValue["KRN"], actualValue["KRN"]);
+      CollectionAssert.AreEqual(expectedValue["YEN"], actualValue["YEN"]);
+      CollectionAssert.AreEqual(expectedValue.Keys, actualValue.Keys);
+    }
+    [TestMethod]
+    public void Test_Listings_CallsOnAverages_WhenCalled()
+    {
+      //Arrange
+      //Arrange
+      Dictionary<string, double> dictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.4},
+        {"EUR", 1},
+        {"KRN", 0.999439}
+      };
+      Dictionary<string, double> differentDictionary = new Dictionary<string, double>()
+      {
+        {"GBP", 1.5},
+        {"YEN", 1.23},
+        {"KRN", 0.99439}
+      };
+      Dictionary<string, Dictionary<string, double>> data = new Dictionary<string, Dictionary<string, double>>()
+      {
+        {"ME", dictionary},
+        {"WE",differentDictionary}
+      };
+
+      mockHistoricalMap.Setup(x => x.GetHistoricalData()).Returns(data);
+
+      //Act
+      historicalManipulation.Listings("Averages");
+
+      //Assert
+      mockListings.Verify(x => x.Averages(It.IsAny<Dictionary<string, List<double>>>()), Times.Once);
     }
   }
 }

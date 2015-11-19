@@ -18,7 +18,7 @@ namespace CurrencyConverter
       return listOfValues.Average();
     }
 
-    public Dictionary<string, double> SortedAverages(Dictionary<string, double> averageDictionary)
+    public virtual Dictionary<string, double> SortedAverages(Dictionary<string, double> averageDictionary)
     {
       Dictionary<string, double> sortedDictionary = new Dictionary<string, double>();
       foreach (KeyValuePair<string, double> item in averageDictionary.OrderBy(i => i.Value))
@@ -28,7 +28,7 @@ namespace CurrencyConverter
       return sortedDictionary;
     }
 
-    public Dictionary<string, double> StrongerThanEuros(Dictionary<string, double> sortedDictionary)
+    public virtual Dictionary<string, double> StrongerThanEuros(Dictionary<string, double> sortedDictionary)
     {
       List<string> strongerThanEurosList = sortedDictionary.Keys.ToList();
       Dictionary<string, double> strongerThanEurosDictionary = new Dictionary<string, double>();

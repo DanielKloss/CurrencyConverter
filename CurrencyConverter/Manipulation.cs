@@ -8,7 +8,6 @@ namespace CurrencyConverter
 {
   public class Manipulation
   {
-
     public Tuple<double, double> ExtremePerCurrency(List<double> listOfDoubles)
     {
       listOfDoubles.Sort();

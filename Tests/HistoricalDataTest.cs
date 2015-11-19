@@ -11,7 +11,7 @@ namespace Tests
     public class HistoricalDataTest
     {
         HistoricalData newData;
-       // delegate bool del(string path);
+ 
         [TestInitialize]
         public void Setup()
         {

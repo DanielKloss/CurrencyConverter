@@ -18,10 +18,10 @@ namespace CurrencyConverter
       return listOfValues.Average();
     }
 
-    public virtual Dictionary<string, double> SortedAverages(Dictionary<string, double> averageDictionary)
+    public virtual Dictionary<string, double> SortDictionary(Dictionary<string, double> dictionaryToSort)
     {
       Dictionary<string, double> sortedDictionary = new Dictionary<string, double>();
-      foreach (KeyValuePair<string, double> item in averageDictionary.OrderBy(i => i.Value))
+      foreach (KeyValuePair<string, double> item in dictionaryToSort.OrderBy(i => i.Value))
       {
         sortedDictionary.Add(item.Key, item.Value);
       }

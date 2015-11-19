@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.IO;
 
 namespace CurrencyConverter
 {
-    class DailyData
+   public class DailyData
     {
 
       public static Dictionary<string, double> dictionaryMetaDaily;
         
        public static Dictionary<string, double> ReadXMLFile(string URL)
         {
+
+            if (File.Exists(URL)) { 
             String URLString = URL;
 
             XmlDocument doc = new XmlDocument();
@@ -32,6 +35,12 @@ namespace CurrencyConverter
             }
             dictionaryMetaDaily = dailyDictionary;
             return dictionaryMetaDaily;
+            }
+            else
+            {
+                Console.WriteLine("Error: The file does not exist");
+                return null;
+            }
         }
        public static Dictionary<string, double> GetDictionary()
        {
